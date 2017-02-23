@@ -1,24 +1,23 @@
 import Domain.Customer;
 import Domain.CustomerService;
 import Domain.LoyaltyCard;
-import static org.junit.Assert.assertThat;
-
-import com.sun.org.apache.xpath.internal.operations.Equals;
-import org.junit.Assert;
+import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Created by christom on 23/02/2017.
- */
 public class CustomerServiceTest {
+    private Customer testCustomer;
+    private CustomerService service;
+
+    @Before
+    public void setUp(){
+        testCustomer = new Customer(1,"Joe", new LoyaltyCard(556,1));
+        service = new CustomerService();
+        service.addCustomer(testCustomer);
+    }
 
     @Test
     public void findByBarCodeTest(){
-        Customer testCustomer = new Customer(1,"Joe", new LoyaltyCard(556,1));
-        CustomerService service = new CustomerService();
-        service.addCustomer(testCustomer);
-
-        assertThat(service.findByBarCode(556));
-
+        Assertions.assertThat(service.findCustomerByBarcode(556).get()).isEqualTo(testCustomer);
     }
 }

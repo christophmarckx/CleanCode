@@ -1,8 +1,5 @@
 package Domain;
 
-/**
- * Created by christom on 23/02/2017.
- */
 public class Customer {
 
     private int id;
@@ -13,14 +10,6 @@ public class Customer {
         this.id = id;
         this.name = name;
         this.customerCard = customerCard;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public long getCustomerBarCode() {
@@ -36,7 +25,10 @@ public class Customer {
 
         if (id != customer.id) return false;
         if (name != null ? !name.equals(customer.name) : customer.name != null) return false;
-        return customerCard != null ? customerCard.equals(customer.customerCard) : customer.customerCard == null;
+        if (customerCard != null ? !customerCard.equals(customer.customerCard) : customer.customerCard != null)
+            return false;
+
+        return true;
     }
 
     @Override

@@ -1,23 +1,19 @@
 package Domain;
 
-import Domain.Customer;
+import java.util.Optional;
 
-/**
- * Created by christom on 23/02/2017.
- */
 public class CustomerService {
 
-    CustomerRepository repository;
+    private CustomerRepository repository = new CustomerRepository();
 
     public void addCustomer(Customer aCustomer) {
         repository.addCustomer(aCustomer);
     }
 
-    public Customer findByBarCode(long barCode){
+    public Optional<Customer> findCustomerByBarcode(long barCode){
 
-        for (Customer customer:repository.getCustomers()) {
-            if (customer.getCustomerBarCode() == barCode){return customer;}
-        }
-        return null;
+        return repository.getCustomers().stream()
+                                        .filter(c->c.getCustomerBarCode()==barCode)
+                                        .findFirst();
     }
 }
