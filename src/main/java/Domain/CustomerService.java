@@ -7,6 +7,17 @@ import Domain.Customer;
  */
 public class CustomerService {
 
-    public static void addCustomer(Customer aCustomer) {
+    CustomerRepository repository;
+
+    public void addCustomer(Customer aCustomer) {
+        repository.addCustomer(aCustomer);
+    }
+
+    public Customer findByBarCode(long barCode){
+
+        for (Customer customer:repository.getCustomers()) {
+            if (customer.getCustomerBarCode() == barCode){return customer;}
+        }
+        return null;
     }
 }

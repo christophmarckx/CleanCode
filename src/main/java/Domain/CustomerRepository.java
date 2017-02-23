@@ -1,5 +1,6 @@
 package Domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,13 +8,13 @@ import java.util.List;
  */
 public class CustomerRepository {
 
-    public Customer toegevoegdeCustomers(List<Customer> toegevoegdeCustomers) {
-        Customer customer = new Customer();
+    List<Customer> customers = new ArrayList<Customer>();
 
-        for (Customer aCustomer:toegevoegdeCustomers) {
-            CustomerService.addCustomer(aCustomer);
+    public void addCustomer(Customer customer){
+        customers.add(customer);
+    }
 
-        }
-        return customer ;
+    public List<Customer> getCustomers(){
+        return customers;
     }
 }

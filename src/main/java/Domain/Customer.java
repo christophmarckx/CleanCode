@@ -4,34 +4,46 @@ package Domain;
  * Created by christom on 23/02/2017.
  */
 public class Customer {
-    private String name;
-    private String barcode;
 
-    public Customer() {
-        this.name = null;
-        this.barcode = null;
+    private int id;
+    private String name;
+    private LoyaltyCard customerCard;
+
+    public Customer(int id, String name, LoyaltyCard customerCard) {
+        this.id = id;
+        this.name = name;
+        this.customerCard = customerCard;
     }
 
-    public Customer(String name, String barcode) {
-        this.name = name;
-        this.barcode = barcode;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public long getCustomerBarCode() {
+        return customerCard.getBarCode();
     }
 
-    public String getBarcode() {
-        return barcode;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Customer customer = (Customer) o;
+
+        if (id != customer.id) return false;
+        if (name != null ? !name.equals(customer.name) : customer.name != null) return false;
+        return customerCard != null ? customerCard.equals(customer.customerCard) : customer.customerCard == null;
     }
 
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (customerCard != null ? customerCard.hashCode() : 0);
+        return result;
     }
-
-
 }
