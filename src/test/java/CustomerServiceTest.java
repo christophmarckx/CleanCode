@@ -11,13 +11,16 @@ public class CustomerServiceTest {
 
     @Before
     public void setUp(){
-        testCustomer = new Customer(1,"Joe", new LoyaltyCard(556,1));
+        testCustomer = new Customer(1,"Joe", new LoyaltyCard());
         service = new CustomerService();
         service.addCustomer(testCustomer);
     }
 
     @Test
     public void findByBarCodeTest(){
-        Assertions.assertThat(service.findCustomerByBarcode(556).get()).isEqualTo(testCustomer);
+        LoyaltyCard lc = new LoyaltyCard();
+        Customer wouter = new Customer(2, "Wouter", lc);
+        service.addCustomer(wouter);
+        Assertions.assertThat(service.findCustomerByBarcode(lc.getBarCode()).get()).isEqualTo(wouter);
     }
 }

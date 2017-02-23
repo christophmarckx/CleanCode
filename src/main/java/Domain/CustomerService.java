@@ -10,10 +10,10 @@ public class CustomerService {
         repository.addCustomer(aCustomer);
     }
 
-    public Optional<Customer> findCustomerByBarcode(long barCode){
+    public Optional<Customer> findCustomerByBarcode(String barCode){
 
         return repository.getCustomers().stream()
-                                        .filter(c->c.getCustomerBarCode()==barCode)
+                                        .filter(c->c.getCustomerBarCode().equals(barCode))
                                         .findFirst();
     }
 }

@@ -1,19 +1,21 @@
 package Domain;
 
+import java.util.UUID;
+
 /**
  * Created by rodrPMFF on 23/02/2017.
  */
 public class LoyaltyCard {
 
-    private long barCode;
+    private String barCode;
     private int bonusPoints;
 
-    public LoyaltyCard(long barCode, int bonusPoints) {
-        this.barCode = barCode;
-        this.bonusPoints = bonusPoints;
+    public LoyaltyCard() {
+        this.barCode = UUID.randomUUID().toString();
+        this.bonusPoints = 0;
     }
 
-    public long getBarCode() {
+    public String getBarCode() {
         return barCode;
     }
 
@@ -28,13 +30,13 @@ public class LoyaltyCard {
 
         LoyaltyCard that = (LoyaltyCard) o;
 
-        if (barCode != that.barCode) return false;
-        return bonusPoints == that.bonusPoints;
+        if (bonusPoints != that.bonusPoints) return false;
+        return barCode != null ? barCode.equals(that.barCode) : that.barCode == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (barCode ^ (barCode >>> 32));
+        int result = barCode != null ? barCode.hashCode() : 0;
         result = 31 * result + bonusPoints;
         return result;
     }

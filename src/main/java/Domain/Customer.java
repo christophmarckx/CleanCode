@@ -1,20 +1,27 @@
 package Domain;
 
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class Customer {
 
     private int id;
     private String name;
     private LoyaltyCard customerCard;
+    private Map<LocalDate, Groceries> groceries;
 
     public Customer(int id, String name, LoyaltyCard customerCard) {
         this.id = id;
         this.name = name;
         this.customerCard = customerCard;
+        this.groceries = new TreeMap<>();
     }
 
-    public long getCustomerBarCode() {
+    public String getCustomerBarCode() {
         return customerCard.getBarCode();
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -37,5 +44,13 @@ public class Customer {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (customerCard != null ? customerCard.hashCode() : 0);
         return result;
+    }
+
+    public void addGroceries(LocalDate date, Groceries groceries) {
+        this.groceries.put(date, groceries);
+    }
+
+    public Groceries getGroceriesForDay(LocalDate date) {
+        return groceries.get(date);
     }
 }
